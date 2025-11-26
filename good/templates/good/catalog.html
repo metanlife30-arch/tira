@@ -1,14 +1,8 @@
-{% extends "good/base.html" %}
+{% extends "base.html" %}
 {% load static %}
 {% load  good_templat %}
-{% block footer %}
-    <footer class="py-4 bg-dark">
-        <div class="container">
-            <p class="m-0 text-center text-white">Copyright &copy; Home Python Hub Studio 2023</p>
-        </div>
-    </footer>
-{% endblock footer %}
-{% block content %}
+
+{% block contents %}
     <div class="row">
                             <!-- Форма фильтров -->
                             <div class="dropdown mb-2">
@@ -85,7 +79,7 @@
                             {% endfor %}
 
                         </div>
-{% endblock content %}
+{% endblock contents %}
 {% block paginachion %}
     <nav aria-label="Page navigation example">
                         <ul class="pagination justify-content-center my-4">
@@ -113,3 +107,10 @@
                         </ul>
                     </nav>                        
 {% endblock paginachion %}
+{% block footer %}
+    <footer class="py-4 bg-dark">
+        <div class="container">
+            <p class="m-0 text-center text-white">Copyright &copy; Home Python Hub Studio 2023</p>
+        </div>
+    </footer>
+{% endblock footer %}

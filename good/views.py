@@ -14,7 +14,7 @@ def catalog(request,category_slug=None):
 
     if category_slug == 'all':
         goods= Products.objects.all()
-    elif query:
+    elif query :
         goods =  q_search(query)
     
     else:
