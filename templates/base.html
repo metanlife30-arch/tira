@@ -9,18 +9,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static "deps/css/bootstrap/bootstrap.min.css" %}">
     <link rel="stylesheet" href="{% static "deps/css/my_css.css" %}">
+    <!-- Стиль footer-a для главной страницы -->
+    {% block css %}{% endblock css %}
+    <!-- Favicons for different platforms -->
     <link rel="apple-touch-icon" sizes="180x180" href="{% static "deps/favicon/apple-touch-icon.png" %}">
     <link rel="icon" type="image/png" sizes="32x32" href="{% static "deps/favicon/favicon-32x32.png" %}">
     <link rel="icon" type="image/png" sizes="16x16" href="{% static "deps/favicon/favicon-16x16.png" %}">
     <link rel="manifest" href="{% static "deps/favicon/site.webmanifest" %}">
-    <title>Каталог</title>
+    <title>Home</title>
 </head>
 
 <body>
     <header>
         <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
             <div class="container">
-                <a class="navbar-brand" href={% url "main:index" %}>Home</a>
+                <a class="navbar-brand" href="{% url "main:index" %}">Home</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -36,14 +39,14 @@
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item  text-white" href="#">Доставка и оплата</a></li>
                                 <li><a class="dropdown-item  text-white" href="#">Контактная информация</a></li>
-                                <li><a class="dropdown-item  text-white" href="#">Про нас</a></li>
+                                <li><a class="dropdown-item  text-white" href="{% url "main:about" %}">Про нас</a></li>
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link  text-white" href="../carts/cart.html">Корзина</a>
+                            <a class="nav-link  text-white" href="carts/cart.html">Корзина</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link  text-white" href="../users/login.html">Войти</a>
+                            <a class="nav-link  text-white" href="users/login.html">Войти</a>
                         </li>
                         <li class="nav-item dropdown ">
                             <a class="nav-link dropdown-toggle text-white" href="#" role="button"
@@ -51,10 +54,10 @@
                                 Мой профиль
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item  text-white" href="../carts/cart.html">Корзина</a></li>
-                                <li><a class="dropdown-item  text-white" href="../users/profile.html">Личный кабинет</a>
+                                <li><a class="dropdown-item  text-white" href="carts/cart.html">Корзина</a></li>
+                                <li><a class="dropdown-item  text-white" href="users/profile.html">Личный кабинет</a>
                                 </li>
-                                <li><a class="dropdown-item  text-white" href="{% url "admin:index" %}">Админ панель</a></li>
+                                <li><a class="dropdown-item  text-white" href={% url "admin:index" %}>Админ панель</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
@@ -62,7 +65,7 @@
                             </ul>
                         </li>
                     </ul>
-                    <form class="d-flex" role="search" action="{% url "good:search"  %}" method="get" >
+                    <form class="d-flex" role="search" action="{% url "good:search"  %}" method="get">
                         <input class="form-control me-2" type="search" name="q" placeholder="Search" aria-label="Search">
                         <button class="btn btn-outline-success text-white" type="submit">Поиск</button>
                     </form>
@@ -91,10 +94,11 @@
                 </div>
                 <!-- Значек корзины, вызывает модальное окно -->
                 <div>
-                    <button type="button" class="btn btn-dark btn-secondary d-flex" id="modalButton" aria-expanded="false">
+                    <button type="button" class="btn btn-dark btn-secondary d-flex" id="modalButton"
+                        aria-expanded="false">
                         <img class="mx-1" src="{% static "deps/icons/basket2-fill.svg" %}" alt="Catalog Icon" width="24"
                             height="24">
-                        <span>0</span>
+                        <span id="goods-in-cart-count">0</span>
                     </button>
                 </div>
                 <!-- Разметка модального окна корзины -->
@@ -153,7 +157,7 @@
                                     </div>
                                     <!-- Закончилась разметка корзины -->
                                 </div>
-                                <a class="btn btn-dark" href="../orders/create_order.html">
+                                <a class="btn btn-dark" href="orders/create_order.html">
                                     Оформить заказ
                                 </a>
                             </div>
@@ -167,22 +171,21 @@
         <div class="container">
             <div class="row mt-1">
                 <div class="col-lg-2">
-                    <!-- Пустой блок на усмотрение -->
+                    <!-- Пустой блок на Ваше усмотрение -->
                 </div>
                 <div class="col-lg-10">
                     <!-- Контент на странице -->
-                    {% block content %}{% endblock content %}
-                    <!-- Пагинация -->
+                    {% block contents %}{% endblock  %}
                     {% block paginachion %}{% endblock paginachion %}
                 </div>
             </div>
         </div>
     </section>
     {% block footer %}{% endblock footer %}
-    <script src="{% static  "deps/js/jquery/jquery-3.7.0.min.js"%}"></script>
-    <script src="{% static  "deps/js/jquery-events.js"%}"></script>
-    <script src="{% static  "deps/js/jquery-ajax.js"%}"></script>
-    <script src="{% static  "deps/js/bootstrap/bootstrap.bundle.min.js"%}"></script>
+    <script src="{% static "deps/js/jquery/jquery-3.7.0.min.js" %}"></script>
+    <script src="{% static "deps/js/jquery-events.js" %}"></script>
+    <script src="{% static "deps/js/jquery-ajax.js" %}"></script>
+    <script src="{% static "deps/js/bootstrap/bootstrap.bundle.min.js" %}"></script>
 </body>
 
 </html>
